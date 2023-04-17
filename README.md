@@ -6,3 +6,14 @@ https://docs.earthly.dev
 
 Join our Slack community
 https://earthly.dev/slack
+
+Ideas to get inspired
+https://github.com/earthly/earthly/tree/main/examples
+
+# Requirements
+Earthly installed and configured
+git installed
+Internet access
+
+# To run the hiworld example
+´´´earthly github.com/zelfick/earthly/hiworld+hello´´´
