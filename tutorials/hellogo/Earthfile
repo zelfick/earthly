@@ -1,0 +1,13 @@
+VERSION 0.7
+FROM golang:1.15-alpine3.13
+WORKDIR /run
+
+build:
+    COPY main.go .
+    RUN go build -o output/hellogo main.go
+    SAVE ARTIFACT output/hellogo AS LOCAL local-output/hellogo
+
+docker:
+    COPY +build/hellogo .
+    ENTRYPOINT ["/run/hellogo"]
+    SAVE IMAGE hellogo:latest

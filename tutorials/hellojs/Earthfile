@@ -1,0 +1,14 @@
+VERSION 0.7
+FROM node:13.10.1-alpine3.11
+WORKDIR /jshello
+
+build:
+    # In JS, there's nothing to build in this simple form.
+    # The source is also the artifact used in production.
+    COPY src/index.js .
+    SAVE ARTIFACT index.js /run/index.js
+
+docker:
+    COPY +build/run run
+    ENTRYPOINT ["node", "./run/index.js"]
+    SAVE IMAGE hellojs:latest

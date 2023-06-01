@@ -1,0 +1,18 @@
+VERSION 0.7
+FROM openjdk:8-jdk-alpine
+RUN apk add --update --no-cache gradle
+WORKDIR /run
+
+build:
+    COPY build.gradle ./
+    COPY src src
+    RUN gradle build
+    RUN gradle install
+    SAVE ARTIFACT build/install/run/bin /bin
+    SAVE ARTIFACT build/install/run/lib /lib
+
+docker:
+    COPY +build/bin bin
+    COPY +build/lib lib
+    ENTRYPOINT ["/run/bin/hellojava"]
+    SAVE IMAGE hellojava:latest
